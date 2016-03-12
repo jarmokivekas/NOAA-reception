@@ -1,3 +1,6 @@
 .ipynb_checkpoints
 circuits/**/*.raw
 circuits/**/*.log
+notes.html
+projectlog.html
+recordings/*wav
