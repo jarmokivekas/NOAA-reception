@@ -50,7 +50,7 @@ class top_block(grc_wxgui.top_block_gui):
         self.blocks_keep_one_in_n_0 = blocks.keep_one_in_n(gr.sizeof_float*1, 2)
         self.blocks_float_to_uchar_0 = blocks.float_to_uchar()
         self.blocks_float_to_complex_0 = blocks.float_to_complex(1)
-        self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_char*1, sys.argv[2], False)
+        self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_char*1, sys.argv[1]+".gray", False)
         self.blocks_file_sink_0.set_unbuffered(False)
         self.blocks_complex_to_mag_0 = blocks.complex_to_mag(1)
         self.band_pass_filter_0 = filter.fir_filter_fff(1, firdes.band_pass(
@@ -83,6 +83,9 @@ class top_block(grc_wxgui.top_block_gui):
         self.band_pass_filter_0.set_taps(firdes.band_pass(1, self.samp_rate, 500, 4200, 2000, firdes.WIN_HAMMING, 6.76))
 
 if __name__ == '__main__':
+    if len(sys.argv) != 2:
+        print "Usage:", sys.argv[0], "<input.wav>\noutput will be written to input.wav.gray"
+        exit(-1)
     import ctypes
     import os
     if os.name == 'posix':
